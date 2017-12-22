@@ -61,6 +61,13 @@ class TaskRepository
         $stmt->execute(['user_id' => $userId, 'id' => $id]);
     }
 
+    public function deleteFromUser(int $userId)
+    {
+        $stmt = $this->connection->prepare('DELETE FROM task WHERE user_id = :user_id');
+
+        $stmt->execute(['user_id' => $userId]);
+    }
+
     public function insertTask(int $userId, string $description, bool $status)
     {
         $sql = 'INSERT INTO task(user_id, description, creation_dated, status) 

@@ -32,6 +32,9 @@ class UserRestController extends Controller
             throw new NotFoundException('User not found');
         }
 
+        // we need to delete all user task before removing the user
+        $this->app->getService('task.repository')->deleteFromUser($id);
+
         $this->getRepository()->delete($id);
 
         $this->statusCode = 204;

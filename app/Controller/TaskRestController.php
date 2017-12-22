@@ -30,7 +30,6 @@ class TaskRestController extends Controller
     public function deleteUserTaskAction($userId, $id)
     {
         $task = $this->getRepository()->findOne((int) $userId, (int) $id);
-
         if (!$task) {
             throw new NotFoundException('Task not found');
         }
