@@ -1,0 +1,19 @@
+{
+    "name": "thomas/sample-app",
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "authors": [
+        {
+            "name": "Thomas LETELLIER",
+            "email": "ltrtom@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+      "psr-4": {
+        "SampleApp\\": "src/SampleApp/",
+        "App\\": "app/"
+      }
+    }
+}
