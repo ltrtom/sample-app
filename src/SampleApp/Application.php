@@ -50,24 +50,15 @@ class Application
     }
 
     /**
-     * Register a route to the app
-     * this route will be called if it matched http verb and path
+     * launch the application:
+     * - find the matching route to the $serverPathInfo field
+     * - create the concerned controller
+     * - call the action
+     * - encode the response in JSON
      *
-     * @param string $method
-     * @param string $path
-     * @param string $controller
-     * @param string $action
+     * @throws \Exception
+     *
      */
-    public function addRoute(string $method, string $path, string $controller, string $action)
-    {
-        $this->routes[] = new Route(
-            $method,
-            $path,
-            $controller,
-            $action
-        );
-    }
-
     public function run()
     {
         // first step we found the corresponding route
@@ -116,6 +107,33 @@ class Application
         }
     }
 
+    /**
+     * Register a route to the app
+     * this route will be called if it matched http verb and path
+     *
+     * @param string $method
+     * @param string $path
+     * @param string $controller
+     * @param string $action
+     */
+    public function addRoute(string $method, string $path, string $controller, string $action)
+    {
+        $this->routes[] = new Route(
+            $method,
+            $path,
+            $controller,
+            $action
+        );
+    }
+
+    /**
+     * Create an instance of PDO and keep it as as service
+     *
+     * @param string $server
+     * @param string $databaseName
+     * @param string $user
+     * @param string $password
+     */
     public function initDatabase(string $server, string $databaseName, string $user, string $password)
     {
         $pdo = new PDO(
@@ -128,6 +146,13 @@ class Application
         $this->registerSharedService('db', $pdo);
     }
 
+
+    /**
+     * return the instance of service concerned by the key
+     * @param string $key
+     * @return mixed
+     * @throws \Exception
+     */
     public function getService(string $key)
     {
         if (!isset($this->services[$key])) {
@@ -137,6 +162,11 @@ class Application
         return $this->services[$key];
     }
 
+    /**
+     * add or replace a instance of service in the container
+     * @param string $key
+     * @param $instance
+     */
     public function registerSharedService(string $key, $instance)
     {
         $this->services[$key] = $instance;

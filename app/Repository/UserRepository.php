@@ -57,6 +57,12 @@ class UserRepository
         $stmt->execute(['id' => $id]);
     }
 
+    /**
+     * Persist a user into database
+     * @param $email
+     * @param $name
+     * @return int the id of the inserted user
+     */
     public function insertUser($email, $name)
     {
         $stmt = $this->connection->prepare('INSERT INTO `user`(email, name) VALUES (:email, :name)');

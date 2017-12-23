@@ -26,7 +26,7 @@ class TaskRepository
      */
     public function findAll(int $userId)
     {
-        $sql = 'SELECT id, description, creation_dated, status FROM task WHERE user_id = :user_id';
+        $sql = 'SELECT id, description, creation_date, status FROM task WHERE user_id = :user_id';
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['user_id' => $userId]);
 
@@ -40,7 +40,7 @@ class TaskRepository
      */
     public function findOne(int $userId, int $id)
     {
-        $sql = 'SELECT id, description, creation_dated, status FROM task WHERE user_id = :user_id AND id = :id';
+        $sql = 'SELECT id, description, creation_date, status FROM task WHERE user_id = :user_id AND id = :id';
         $stmt  = $this->connection->prepare($sql);
         $stmt->execute(['user_id' => $userId, 'id' => $id]);
 
@@ -61,6 +61,10 @@ class TaskRepository
         $stmt->execute(['user_id' => $userId, 'id' => $id]);
     }
 
+    /**
+     * Remove all task from a given user
+     * @param int $userId
+     */
     public function deleteFromUser(int $userId)
     {
         $stmt = $this->connection->prepare('DELETE FROM task WHERE user_id = :user_id');
@@ -68,9 +72,17 @@ class TaskRepository
         $stmt->execute(['user_id' => $userId]);
     }
 
+    /**
+     * Persist a task in database
+     *
+     * @param int $userId
+     * @param string $description
+     * @param bool $status
+     * @return int the id of the inserted task
+     */
     public function insertTask(int $userId, string $description, bool $status)
     {
-        $sql = 'INSERT INTO task(user_id, description, creation_dated, status) 
+        $sql = 'INSERT INTO task(user_id, description, creation_date, status) 
                 VALUES (:user_id, :description, NOW(), :status)';
 
         $stmt = $this->connection->prepare($sql);

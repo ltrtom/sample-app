@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Application</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
+    <link rel="stylesheet" href="app.css">
+    <style>
+
+    </style>
+</head>
+<body ng-app="sample">
+    <div class="main-container" ng-controller="sampleCtrl as ctrl">
+        <div layout="row">
+            <div flex>
+                <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Utilisateurs</span>
+
+                            <div layout-gt-sm="row">
+                                <md-input-container>
+                                    <label>Nom</label>
+                                    <input ng-model="ctrl.name">
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>Email</label>
+                                    <input ng-model="ctrl.email">
+                                </md-input-container>
+
+                                <md-button class="md-primary" ng-click="ctrl.addUser()">Ajouter</md-button>
+                            </div>
+
+
+                            <md-list ng-cloak>
+                                <md-list-item ng-repeat="user in ctrl.users">
+                                    <p>{{ user.name }}</p>
+                                    <p>{{ user.email }}</p>
+                                    <md-button class="md-raised md-warn" ng-click="ctrl.deleteUser(user.id)">Supprimer</md-button>
+                                    <md-button class="md-raised" ng-click="ctrl.loadUserTask(user)">Voir les Tâches</md-button>
+                                </md-list-item>
+                            </md-list>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+            </div>
+            <div flex> <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Tâches de {{ctrl.current.name}}</span>
+
+                        <div layout-gt-sm="row">
+                            <md-input-container>
+                                <label>Description</label>
+                                <input ng-model="ctrl.description">
+                            </md-input-container>
+                            <md-input-container>
+                                <md-checkbox ng-model="ctrl.status"></md-checkbox>
+                            </md-input-container>
+                            <md-button class="md-primary" ng-click="ctrl.addTask()">Ajouter</md-button>
+                        </div>
+                        <md-list ng-cloak>
+                            <md-list-item ng-repeat="task in ctrl.tasks">
+                                <p>{{ task.description }}</p>
+                                <p>{{ task.creation_date }}</p>
+                                <p>{{ task.status === '1' ? 'Faite' : 'A faire' }}</p>
+                                <md-button class="md-raised md-warn" ng-click="ctrl.deleteTask(task .id)">Supprimer</md-button>
+                            </md-list-item>
+                        </md-list>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card></div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

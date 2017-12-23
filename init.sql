@@ -9,7 +9,7 @@ CREATE TABLE task (
   id             INT          NOT NULL AUTO_INCREMENT,
   user_id        INT          NOT NULL,
   description    VARCHAR(255) NOT NULL,
-  creation_dated DATETIME     NOT NULL,
+  creation_date  DATETIME     NOT NULL,
   status         BOOLEAN      NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES `user` (id)

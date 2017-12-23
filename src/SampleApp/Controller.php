@@ -23,6 +23,9 @@ class Controller
         $this->app = $app;
     }
 
+    /**
+     * @return mixed|null
+     */
     protected function getRequestBody()
     {
         $json = file_get_contents('php://input');
@@ -34,6 +37,15 @@ class Controller
         return json_decode($json, true);
     }
 
+    /**
+     * Read the request body, parse the JSON value and check those fields
+     * passed as parameters are fulfilled in the payload
+     * throw an BadRequestException if not
+     *
+     * @param array $mandatoryKeys
+     * @return mixed|null
+     * @throws BadRequestException
+     */
     protected function validateForm(array $mandatoryKeys)
     {
         $data = $this->getRequestBody();
