@@ -10,7 +10,7 @@ use SampleApp\Exception\NotFoundException;
 
 $app = new Application($_SERVER);
 
-$app->initDatabase('localhost', 'sample', 'root', 'root');
+$app->initDatabase('<host>', '<database_name>', '<database_user>', '<database_password>');
 
 // setup routing for user part
 $app->addRoute('GET', '/users', UserRestController::class, 'listUsersAction');
