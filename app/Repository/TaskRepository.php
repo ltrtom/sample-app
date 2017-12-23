@@ -50,7 +50,7 @@ class TaskRepository
     }
 
     /**
-     * Remove a user from the database
+     * Remove a task from the database
      * @param int $userId
      * @param int $id $
      */
