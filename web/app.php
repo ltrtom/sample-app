@@ -1,6 +1,6 @@
 <?php
 require  '../vendor/autoload.php';
-opcache_reset();
+
 use App\Controller\TaskRestController;
 use App\Controller\UserRestController;
 use App\Repository\TaskRepository;
